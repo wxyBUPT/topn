@@ -55,6 +55,15 @@ class UrlGenerator:
         '''
         return self.xmly_urls
 
+    def get_xmly_topn_n(self):
+        '''
+        获得每一个类别要爬取n 的数目
+        :return:
+        '''
+        return int(
+            self.r.get(ConfUtil.get_xmly_topn_key())
+        )
+
 
 if __name__ == "__main__":
     urlGenerator = UrlGenerator()

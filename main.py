@@ -40,21 +40,18 @@ def set_test_env():
     :return:
     '''
     # 设置喜马拉雅的测试环境，在redis 中随机抽取10个网址，爬取top100 的节目
-    res = db.get_collection(ConfUtil.xmly_album_table()).find().limit(10)
+    res = db.get_collection(ConfUtil.xmly_album_table()).find().limit(2)
 
     urls = [
         album["href"] for album in res
     ]
+    print urls
 
     top_n = 100
 
     r.set(ConfUtil.get_xmly_topn_key(), top_n)
     print u'在这里'
-    print ConfUtil.get_xmly_topn_key()
-    print r.get(ConfUtil.get_xmly_topn_key())
-    print urls[0]
-    print ConfUtil.get_xmly_topn_urls_key()
-    r.sadd(ConfUtil.get_xmly_topn_urls_key(),urls[0])
+    r.delete(ConfUtil.get_xmly_topn_urls_key())
     r.sadd(ConfUtil.get_xmly_topn_urls_key(), *urls)
     print r.smembers(ConfUtil.get_xmly_topn_urls_key())
 

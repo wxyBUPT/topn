@@ -10,14 +10,15 @@ import scrapy
 2、随机headers，随机ua
 2、代理
 '''
-from scrapy.http import Request
-import time
 import datetime
+import json
 import sys
 
 import requests
+from scrapy.http import Request
+from scrapy import signals
+from scrapy.xlib.pydispatch import dispatcher
 
-from topn.conf import ConfUtil
 from topn.util.urlgenerator import UrlGenerator
 from topn.items import XMLYAudio
 
@@ -44,6 +45,9 @@ class XmlySpider(scrapy.Spider):
     topn_n = urlGenenator.get_xmly_topn_n()
 
     def __init__(self,stats,*args,**kwargs):
+        dispatcher.connect(
+            self.spider_closed,signals.spider_closed
+        )
         super(XmlySpider,self).__init__(*args,**kwargs)
         self.stats = stats
 
@@ -153,10 +157,15 @@ class XmlySpider(scrapy.Spider):
             audio.update(tmpDict)
             yield audio
 
-        self.inspect(response)
-
         pass
 
     def inspect(self, response):
         from scrapy.shell import inspect_response
         inspect_response(response, self)
+
+    def spider_closed(self,spider):
+        stats = self.stats
+        print dir(stats.get_stats())
+        print type(stats.get_stats())
+        print stats.get_stats()
+        pass

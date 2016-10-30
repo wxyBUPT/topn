@@ -48,6 +48,46 @@ class ConfUtil:
             )
         )
 
+    # 从配置中心中获得key
+    @classmethod
+    def get_xmly_topn_table_key(cls):
+        return r.hget(
+            cls.cnr_conf_hash,
+            cf.get(
+                "cnr_conf","xmly_topn_table"
+            )
+        )
+
+    @classmethod
+    def get_topn_report_table_key(cls):
+        return r.hget(
+            cls.cnr_conf_hash,
+            cf.get(
+                "cnr_conf","topn_report_table"
+            )
+        )
+
+    @classmethod
+    def set_topn_report_table_key(cls,key):
+        r.hset(
+            cls.cnr_conf_hash,
+            cf.get(
+                "cnr_conf","topn_report_table",
+            ),
+            key
+        )
+
+    # 设置配置中心xmlytopntable key 的值
+    @classmethod
+    def set_xmly_topn_table_key(cls, key):
+        r.hset(
+            cls.cnr_conf_hash,
+            cf.get(
+                "cnr_conf", "xmly_topn_table"
+            ),
+            key
+        )
+
     @classmethod
     def set_xmly_topn_key(cls,key):
         r.hset(

@@ -64,7 +64,6 @@ class UrlGenerator:
             self.r.get(ConfUtil.get_xmly_topn_key())
         )
 
-
 if __name__ == "__main__":
     urlGenerator = UrlGenerator()
 

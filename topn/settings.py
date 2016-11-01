@@ -64,6 +64,9 @@ NEWSPIDER_MODULE = 'topn.spiders'
 #ITEM_PIPELINES = {
 #    'topn.pipelines.SomePipeline': 300,
 #}
+ITEM_PIPELINES = {
+    'topn.pipelines.SaveToMongo':800,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

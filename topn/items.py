@@ -61,3 +61,6 @@ class XMLYAudio(scrapy.Item):
 
     # 音频的标签内容
     tags = scrapy.Field()
+
+    # 音频原始的地址
+    href = scrapy.Field()

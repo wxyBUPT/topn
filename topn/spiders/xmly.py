@@ -11,7 +11,6 @@ import scrapy
 2、代理
 '''
 import datetime
-import json
 import sys
 
 import requests
@@ -88,13 +87,12 @@ class XmlySpider(scrapy.Spider):
                              0
                              )
 
-        tags = response.css('a.tagBtn2').xpath('span/text()').extract()
-        audioCountsStr = response.css('.albumSoundcount').xpath('text()').extract()[0]
-        audioCount = int(audioCountsStr[1:-1])
 
         audios = response.css("li[sound_id]")[:can_crawl_count]
         for s in audios:
+            sound_href = s.xpath("div/a/@href")[0].extract()
             audio = XMLYAudio()
+            audio['href'] = "http://www.ximalaya.com" + sound_href
             try:
                 a_id = s.xpath('@sound_id').extract()[0]
                 created_at = s.xpath('div/div/span/text()').extract()[0]
@@ -165,7 +163,7 @@ class XmlySpider(scrapy.Spider):
 
     def spider_closed(self,spider):
         stats = self.stats
-        print dir(stats.get_stats())
-        print type(stats.get_stats())
         print stats.get_stats()
-        pass
+        from topn.util.report import write_xmly_status
+        self.logger.info("保存报表")
+        write_xmly_status(stats.get_stats())

@@ -30,6 +30,7 @@ def write_xmly_status(status):
     report = {"status":status}
     report['table'] = ConfUtil.get_xmly_topn_table()
     report['table_delete'] = False
+    report['s_type'] = 'xmly_audio'
     db[ConfUtil.get_topn_report_table_name()].insert(
         report
     )

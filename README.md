@@ -2,7 +2,7 @@
 
 ## 在mongo中需要设置索引的主键有
 
-'''python  
+```python  
         # xmly qt kl 类似下面的部分需要设置索引
         audio = self.db[item.collection].find_one(
             {
@@ -20,4 +20,4 @@
             },
             upsert = True
         )
-'''
+```

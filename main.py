@@ -31,10 +31,13 @@ def conf_conf():
     下面是初始化配置中心，整个项目的所有配置都在这里初始化
     :return:
     '''
+    raise Exception("Method conf_conf is nolonger suport")
+    '''
     ConfUtil.set_xmly_topn_key("xmly_topn_n")
     ConfUtil.set_xmly_topn_urls_key("xmly_topn_albums_url")
     ConfUtil.set_xmly_topn_table_key("xmly_topn_table")
     ConfUtil.set_topn_report_table_key("topn_report")
+    '''
 
 def set_test_env():
     '''
@@ -56,11 +59,12 @@ def set_test_env():
     r.delete(ConfUtil.get_xmly_topn_urls_key())
     r.sadd(ConfUtil.get_xmly_topn_urls_key(), *urls)
     print r.smembers(ConfUtil.get_xmly_topn_urls_key())
-    r.set(ConfUtil.get_xmly_topn_table_key(),"top_100_xmly_20161027")
+    r.set(ConfUtil.get_xmly_topn_table_key(),"top_100_xmly_20161103")
     print r.get(ConfUtil.get_xmly_topn_table_key())
-    r.set(ConfUtil.get_topn_report_table_key(),"topn_history_report")
-    print ConfUtil.get_topn_report_table_key()
-    print r.get(ConfUtil.get_topn_report_table_key())
+
+    # r.set(ConfUtil.get_topn_report_table_key(),"topn_history_report")
+    # print ConfUtil.get_topn_report_table_key()
+    # print r.get(ConfUtil.get_topn_report_table_key())
 
 if __name__ == "__main__":
     set_test_env()

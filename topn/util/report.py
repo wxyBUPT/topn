@@ -3,6 +3,7 @@ __author__ = 'xiyuanbupt'
 # e-mail : xywbupt@gmail.com
 
 import pymongo
+import xmlrpclib
 
 from topn.conf import ConfUtil
 
@@ -34,6 +35,3 @@ def write_xmly_status(status):
     db[ConfUtil.get_topn_report_table_name()].insert(
         report
     )
-
-
-

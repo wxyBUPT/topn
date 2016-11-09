@@ -25,7 +25,6 @@ class ConfUtil:
     但是相对于使用Celery 等队列任务来说减少了不小学习成本
     '''
 
-    cnr_conf_hash = cf.get("cnr_conf","hash_name")
 
     @classmethod
     def get_cnr_conf_hash(cls):
@@ -33,7 +32,7 @@ class ConfUtil:
         获得conf hash表名
         :return:
         '''
-        return cls.cnr_conf_hash
+        raise Exception('This method is nolonger support')
 
     @classmethod
     def get_xmly_topn_key(cls):
@@ -41,11 +40,7 @@ class ConfUtil:
         获得保存topn_n n 的数目的key
         :return:
         '''
-        return r.hget(
-            cls.cnr_conf_hash,cf.get(
-                "cnr_conf","xmly_top_n"
-            )
-        )
+        return cf.get("cnr_conf","xmly_top_n")
 
     @classmethod
     def get_xmly_topn_urls_key(cls):
@@ -53,12 +48,7 @@ class ConfUtil:
         获得保存xmly所有urls 的key
         :return:
         '''
-        return r.hget(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf", "xmly_topn_urls"
-            )
-        )
+        return cf.get("cnr_conf","xmly_topn_urls")
 
     # 从配置中心中获得key
     @classmethod
@@ -67,27 +57,15 @@ class ConfUtil:
         获得本次爬取xmly topn 保存的table的key值
         :return:
         '''
-        return r.hget(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf","xmly_topn_table"
-            )
-        )
+        return cf.get("cnr_conf","xmly_topn_table")
 
     @classmethod
     def get_xmly_topn_table(cls):
         return r.get(cls.get_xmly_topn_table_key())
 
-    # 设置配置中心xmlytopntable key 的值
     @classmethod
     def set_xmly_topn_table_key(cls, key):
-        r.hset(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf", "xmly_topn_table"
-            ),
-            key
-        )
+        raise Exception("This method is nolonger support")
 
     @classmethod
     def get_topn_report_table_name(cls):
@@ -95,45 +73,24 @@ class ConfUtil:
         获得存储table
         :return:
         '''
-        return r.get(cls.get_topn_report_table_key())
+        return cf.get("cnr_conf","topn_report_table")
 
     @classmethod
     def get_topn_report_table_key(cls):
-        return r.hget(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf","topn_report_table"
-            )
-        )
+        raise Exception("Method get_topn_report_table_key is nolonger support")
 
     @classmethod
     def set_topn_report_table_key(cls,key):
-        r.hset(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf","topn_report_table",
-            ),
-            key
-        )
+        raise Exception("Method set_topn_report_table_key is nolongger support")
 
 
     @classmethod
     def set_xmly_topn_key(cls,key):
-        r.hset(
-            cls.cnr_conf_hash,
-            cf.get(
-                "cnr_conf","xmly_top_n",
-            ),
-            key
-        )
+        raise Exception("Method set_xmly_topn_key is nolongger support")
 
     @classmethod
     def set_xmly_topn_urls_key(cls,key):
-        r.hset(
-            cls.cnr_conf_hash,
-            cf.get("cnr_conf","xmly_topn_urls"),
-            key
-        )
+        raise Exception("Method set_xmly_topn_urls_key is nolongger support")
 
     @classmethod
     def xmly_album_table(cls):

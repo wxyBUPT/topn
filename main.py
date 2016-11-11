@@ -52,15 +52,29 @@ def set_test_env():
     ]
     print urls
 
-    top_n = 100
+    top_n = 50
 
+    # 设置xmly 的参数
     r.set(ConfUtil.get_xmly_topn_key(), top_n)
-    print u'在这里'
     r.delete(ConfUtil.get_xmly_topn_urls_key())
     r.sadd(ConfUtil.get_xmly_topn_urls_key(), *urls)
     print r.smembers(ConfUtil.get_xmly_topn_urls_key())
     r.set(ConfUtil.get_xmly_topn_table_key(),"top_100_xmly_20161103")
     print r.get(ConfUtil.get_xmly_topn_table_key())
+
+    # 设置qt 的参数
+    # topn_n
+    r.set(ConfUtil.get_qt_topn_key(),top_n)
+    # urls
+    res = db.get_collection(ConfUtil.qt_album_table()).find().limit(2)
+    urls = [
+        album['albumUrl'] for album in res
+    ]
+    r.sadd(ConfUtil.get_qt_topn_urls_key(),*urls)
+    r.set(ConfUtil.get_qt_topn_table_key(),"top_50_qt_20161103")
+
+    r.delete(ConfUtil.get_qt_topn_urls_key())
+
 
     # r.set(ConfUtil.get_topn_report_table_key(),"topn_history_report")
     # print ConfUtil.get_topn_report_table_key()

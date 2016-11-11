@@ -40,6 +40,11 @@ class UrlGenerator:
             ConfUtil.get_xmly_topn_urls_key()
         )
 
+        self.qt_urls = self.r.smembers(
+            ConfUtil.get_qt_topn_urls_key()
+        )
+
+
     def __init__(self):
         '''
         初始化logger 和所有需要爬取的urls
@@ -63,6 +68,19 @@ class UrlGenerator:
         return int(
             self.r.get(ConfUtil.get_xmly_topn_key())
         )
+
+    def get_qt_topn_n(self):
+        '''
+        获得每一个
+        :return:
+        '''
+        return int(
+            self.r.get(ConfUtil.get_qt_topn_key())
+        )
+
+    def get_qt_urls(self):
+        return self.qt_urls
+
 
 if __name__ == "__main__":
     urlGenerator = UrlGenerator()

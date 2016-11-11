@@ -43,12 +43,24 @@ class ConfUtil:
         return cf.get("cnr_conf","xmly_top_n")
 
     @classmethod
+    def get_qt_topn_key(cls):
+        '''
+        获得保存qt topn_n n 的数目的key
+        :return:
+        '''
+        return cf.get('cnr_conf','qt_topn_n')
+
+    @classmethod
     def get_xmly_topn_urls_key(cls):
         '''
         获得保存xmly所有urls 的key
         :return:
         '''
         return cf.get("cnr_conf","xmly_topn_urls")
+
+    @classmethod
+    def get_qt_topn_urls_key(cls):
+        return cf.get('cnr_conf','qt_topn_urls')
 
     # 从配置中心中获得key
     @classmethod
@@ -60,8 +72,16 @@ class ConfUtil:
         return cf.get("cnr_conf","xmly_topn_table")
 
     @classmethod
+    def get_qt_topn_table_key(cls):
+        return cf.get("cnr_conf","qt_topn_table")
+
+    @classmethod
     def get_xmly_topn_table(cls):
         return r.get(cls.get_xmly_topn_table_key())
+
+    @classmethod
+    def get_qt_topn_table(cls):
+        return r.get(cls.get_qt_topn_table_key())
 
     @classmethod
     def set_xmly_topn_table_key(cls, key):
@@ -103,6 +123,14 @@ class ConfUtil:
     @classmethod
     def xmly_category_table(cls):
         return cf.get("mongo","xmly_category")
+
+    @classmethod
+    def qt_album_table(cls):
+        return cf.get("mongo","qt_item")
+
+    @classmethod
+    def qt_audio_table(cls):
+        return cf.get("mongo","qt_audio")
 
     @classmethod
     def get_redis_host(cls):
